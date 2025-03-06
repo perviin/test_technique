@@ -1,5 +1,4 @@
-
-# test_technique
+# test_technique - Projet réalisé dans le cadre d'un test technique
 
 ## Description du projet
 
