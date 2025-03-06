@@ -35,7 +35,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/show.html.twig', [
             'user' => $user,
-            'userRank' => $userRank,  // Passer le user_rank au template
+            'userRank' => $userRank,  // passage du user_rank au template
         ]);
     }
 }

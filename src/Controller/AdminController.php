@@ -26,7 +26,7 @@ class AdminController extends AbstractController
             /** @var UploadedFile $file */
             $file = $request->files->get('csv_file');
 
-            // Appel du service pour importer le fichier CSV
+            // service pour fichier CSV
             $importData = $this->csvImportService->importCSV($file);
 
             return $this->render('admin/import_users.html.twig', [
