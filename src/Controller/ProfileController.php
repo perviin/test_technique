@@ -1,5 +1,4 @@
 <?php
-// src/Controller/ProfileController.php
 
 namespace App\Controller;
 
