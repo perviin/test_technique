@@ -1,0 +1,37 @@
+{# templates/admin/import_users.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Importer des Utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2>Importation des utilisateurs</h2>
+        <form action="{{ path('app_admin_import_users') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="csv_file">Fichier CSV</label>
+                <input type="file" name="csv_file" id="csv_file" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Importer</button>
+        </form>
+
+        {% if usersImported is not empty %}
+            <h3>Utilisateurs Importés :</h3>
+            <ul>
+                {% for user in usersImported %}
+                    <li>{{ user.username }} - {{ user.email }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if validationErrors is not empty %}
+            <h3>Erreurs de Validation :</h3>
+            <ul>
+                {% for error in validationErrors %}
+                    <li>{{ error.user }} : {{ error.errors|join(', ') }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="{{ path('app_user_index') }}" class="btn btn-primary mt-3">Retour aux utilisateurs</a>
+    </div>
+{% endblock %}

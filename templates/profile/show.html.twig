@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Mon Profil</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Informations Personnelles</h4>
+                        <p><strong>Nom d'utilisateur :</strong> {{ app.user.username }}</p>
+                        <p><strong>Email :</strong> {{ app.user.email }}</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4>Statistiques</h4>
+                        {% if app.user is defined and app.user.infos is defined %}
+                            <p><strong>Rang :</strong> {{ app.user.infos.userRank }}</p>
+                            <p><strong>Victoires :</strong> {{ app.user.infos.victoire }}</p>
+                            <p><strong>Défaites :</strong> {{ app.user.infos.defaite }}</p>
+                        {% else %}
+                            <p>Aucune information disponible.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <form action="{{ path('app_logout') }}" method="post">
+                        <button type="submit" class="btn btn-danger">Se déconnecter</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

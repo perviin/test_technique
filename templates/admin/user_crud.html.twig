@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Gestion des Utilisateurs</h1>
+
+        <a href="{{ path('app_user_new') }}" class="btn btn-primary mb-3">
+            Créer un nouvel utilisateur
+        </a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                           class="btn btn-sm btn-warning">
+                            Modifier
+                        </a>
+                        <form action="{{ path('app_user_delete', {'id': user.id}) }}"
+                              method="POST"
+                              style="display:inline"
+                              onsubmit="return confirm('Êtes-vous sûr ?');">
+                            <input type="hidden" name="_token"
+                                   value="{{ csrf_token('delete' ~ user.id) }}">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Supprimer
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="mt-3">
+            <form action="{{ path('app_logout') }}" method="post">
+                <button type="submit" class="btn btn-danger">Se déconnecter</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
