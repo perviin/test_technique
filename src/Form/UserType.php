@@ -19,17 +19,17 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'Username',
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('email', TextType::class, [
                 'label' => 'Email',
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Password',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Roles',
@@ -43,6 +43,8 @@ class UserType extends AbstractType
             ])
             ->add('infos', InfosType::class, [
                 'label' => false,
+                'required' => false,
+                'mapped' => false
             ]);
     }
 
