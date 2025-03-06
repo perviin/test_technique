@@ -8,7 +8,7 @@ L'application propose un espace administrateur pour gérer les utilisateurs et l
 
 ## Technologies utilisées
 
--   **PHP** (Symfony 6)
+-   **PHP** 8.1.10 (Symfony 6)
     
 -   **Twig** (Moteur de template)
     
