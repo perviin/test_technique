@@ -1,4 +1,6 @@
 {
+    "name": "perviin/test-technique",
+    "description": "Projet Symfony pour un test technique",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
