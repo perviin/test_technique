@@ -1,7 +1,5 @@
 <?php
 
-// src/Entity/Infos.php
-
 namespace App\Entity;
 
 use App\Repository\InfosRepository;
