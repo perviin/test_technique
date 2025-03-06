@@ -30,8 +30,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Infos $infos = null;
 
-    // Autres méthodes ...
-
     public function getId(): ?int
     {
         return $this->id;
@@ -74,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         if (empty($roles)) {
-            $roles[] = 'ROLE_USER';  // Ajoute le rôle ROLE_USER si vide
+            $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
     }
@@ -92,7 +90,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setInfos(Infos $infos): static
     {
-        // Set the owning side of the relation if necessary
         if ($infos->getUser() !== $this) {
             $infos->setUser($this);
         }
@@ -100,18 +97,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // Méthodes requises par UserInterface
     public function getUserIdentifier(): string
     {
         return $this->username;
     }
 
-    public function eraseCredentials(): void
-    {
-        // Optionnel : effacez les données sensibles si nécessaire
-    }
-
-    // Méthodes requises par les interfaces de sécurité
     public function __serialize(): array
     {
         return [
@@ -128,7 +118,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $data['password'];
     }
 
-    // Accéder à userRank via l'entité Infos
     public function getUserRank(): ?string
     {
         return $this->infos?->getUserRank();

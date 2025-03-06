@@ -1,7 +1,5 @@
 <?php
 
-// src/Controller/AdminController.php
-
 namespace App\Controller;
 
 use App\Service\CSVImportService;

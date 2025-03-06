@@ -1,7 +1,5 @@
 <?php
 
-// src/Form/InfosType.php
-
 namespace App\Form;
 
 use App\Entity\Infos;

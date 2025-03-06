@@ -1,5 +1,4 @@
 <?php
-// src/Service/CSVImportService.php
 
 namespace App\Service;
 
@@ -32,11 +31,10 @@ class CSVImportService
         $validationErrors = [];
 
         if (($handle = fopen($file->getPathname(), 'r')) !== false) {
-            // Ignorer la première ligne si elle contient des en-têtes
             fgetcsv($handle, 1000, ';');
 
             while (($data = fgetcsv($handle, 1000, ';')) !== false) {
-                if (count($data) < 4) { // Vérifie qu'il y a au moins 4 colonnes
+                if (count($data) < 4) {
                     continue;
                 }
 
@@ -48,7 +46,7 @@ class CSVImportService
                 $victoire = is_numeric($data[5] ?? null) ? $data[5] : 0;
                 $defaite = is_numeric($data[6] ?? null) ? $data[6] : 0;
 
-                if (!$username || !$email || !$password) { // Vérifie les champs obligatoires
+                if (!$username || !$email || !$password) {
                     continue;
                 }
 
@@ -58,12 +56,10 @@ class CSVImportService
                 $user->setPassword($this->passwordHasher->hashPassword($user, $password));
                 $user->setRoles([$role]);
 
-                // Validation de l'utilisateur
                 $errors = $this->validator->validate($user);
                 if (count($errors) === 0) {
                     $this->entityManager->persist($user);
 
-                    // Création automatique d'une entrée Infos pour l'utilisateur importé
                     $infos = new Infos();
                     $infos->setUser($user);
                     $infos->setUserRank($rank);
@@ -73,7 +69,6 @@ class CSVImportService
 
                     $usersImported[] = $user;
                 } else {
-                    // Ajouter les erreurs de validation
                     $validationErrors[] = [
                         'user' => $username,
                         'errors' => $this->formatValidationErrors($errors)
@@ -91,7 +86,6 @@ class CSVImportService
     }
 
 
-    // Formater les erreurs de validation
     private function formatValidationErrors($errors): array
     {
         $formattedErrors = [];
